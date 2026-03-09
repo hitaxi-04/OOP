@@ -5,27 +5,27 @@ class Rectangle
     double width = 1;
     double height = 1;
 
-    // No argument constructor
+    
     Rectangle()
     {
         width = 1;
         height = 1;
     }
 
-    // Parameterized constructor
+
     Rectangle(double w, double h)
     {
         width = w;
         height = h;
     }
 
-    // Method to find area
+    
     double getArea()
     {
         return width * height;
     }
 
-    // Method to find perimeter
+
     double getPerimeter()
     {
         return 2 * (width + height);
