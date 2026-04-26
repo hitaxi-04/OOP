@@ -1,30 +1,49 @@
 import java.io.*;
+import java.util.Scanner;
 
-public class StudentFileExample {
+public class StudentFileInput {
     public static void main(String[] args) {
 
         FileWriter fw = null;
         BufferedWriter bw = null;
         BufferedReader br = null;
+        Scanner sc = new Scanner(System.in);
 
         try {
-            // Step 1: Create and write to file
+            // Create file and writer
             fw = new FileWriter("students.txt");
             bw = new BufferedWriter(fw);
 
-            bw.write("101, John, 85");
-            bw.newLine();
-            bw.write("102, Alice, 90");
-            bw.newLine();
-            bw.write("103, Bob, 78");
-            bw.newLine();
+            // Ask number of students
+            System.out.print("Enter number of students: ");
+            int n = sc.nextInt();
+            sc.nextLine(); // consume newline
 
-            System.out.println("Student records written successfully.\n");
+            // Take input from user
+            for (int i = 1; i <= n; i++) {
+                System.out.println("\nEnter details for student " + i);
 
-            // Close writer before reading
-            bw.close();
+                System.out.print("Roll Number: ");
+                int roll = sc.nextInt();
+                sc.nextLine(); // consume newline
 
-            // Step 2: Read from file
+                System.out.print("Name: ");
+                String name = sc.nextLine();
+
+                System.out.print("Marks: ");
+                int marks = sc.nextInt();
+                sc.nextLine(); // consume newline
+
+                // Write to file
+                bw.write(roll + ", " + name + ", " + marks);
+                bw.newLine();
+            }
+
+            System.out.println("\nStudent records written successfully.\n");
+
+            bw.close(); // close before reading
+
+            // Read from file
             br = new BufferedReader(new FileReader("students.txt"));
             String line;
 
@@ -34,23 +53,38 @@ public class StudentFileExample {
             }
 
         } catch (IOException e) {
-            System.out.println("An error occurred: " + e.getMessage());
+            System.out.println("File error: " + e.getMessage());
         } finally {
-            // Step 3: Close resources safely
+            // Close resources
             try {
                 if (bw != null) bw.close();
                 if (fw != null) fw.close();
                 if (br != null) br.close();
+                sc.close();
             } catch (IOException e) {
                 System.out.println("Error closing file: " + e.getMessage());
             }
         }
     }
 }
- /*output 
-  Student records written successfully.
+/* output 
+Enter number of students: 2
+
+Enter details for student 1
+Roll Number: 101
+Name: Rahul
+Marks: 88
+
+Enter details for student 2
+Roll Number: 102
+Name: Priya
+Marks: 92
+
+Student records written successfully.
 
 Student Records:
-101, John, 85
-102, Alice, 90
-103, Bob, 78 */
+
+101, Rahul, 88
+102, Priya, 92*/
+
+    
